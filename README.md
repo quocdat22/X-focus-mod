@@ -22,14 +22,10 @@ A lightweight Chrome extension that hides the left navigation sidebar and right 
 > The extension is not published to the Chrome Web Store. Install it manually as an unpacked extension.
 
 1. Clone or download this repository.
-2. Generate the icons (requires Node.js):
-   ```bash
-   node generate-icons.js
-   ```
-3. Open Chrome and go to `chrome://extensions/`.
-4. Enable **Developer mode** (toggle in the top-right corner).
-5. Click **Load unpacked** and select the `extension/` folder.
-6. The X Focus Mode icon will appear in your toolbar.
+2. Open Chrome and go to `chrome://extensions/`.
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **Load unpacked** and select the `extension/` folder.
+5. The X Focus Mode icon will appear in your toolbar.
 
 ## Usage
 
@@ -42,14 +38,13 @@ A lightweight Chrome extension that hides the left navigation sidebar and right 
 
 ```
 X-focus-mod/
-├── extension/
-│   ├── manifest.json      # Extension manifest (Manifest V3)
-│   ├── background.js      # Service worker — handles commands & message routing
-│   ├── content.js         # Injects/removes focus CSS on x.com pages
-│   ├── popup.html         # Popup UI
-│   ├── popup.js           # Popup logic — reads/writes toggle state
-│   └── icons/             # Extension icons (16×16, 48×48, 128×128)
-└── generate-icons.js      # Node.js script to generate icon PNGs
+└── extension/
+    ├── manifest.json      # Extension manifest (Manifest V3)
+    ├── background.js      # Service worker — handles commands & message routing
+    ├── content.js         # Injects/removes focus CSS on x.com pages
+    ├── popup.html         # Popup UI
+    ├── popup.js           # Popup logic — reads/writes toggle state
+    └── icons/             # Extension icons (16×16, 48×48, 128×128)
 ```
 
 ## Technical Details
