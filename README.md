@@ -5,10 +5,11 @@ A lightweight Chrome extension that hides the left navigation sidebar and right 
 ## Features
 
 - **One-click toggle** via the extension popup
+- **Configurable sidebars** — choose to hide Left sidebar (navigation), Right sidebar (trends/widgets), or both (defaults to hiding both)
 - **Keyboard shortcut** `Alt+Z` to toggle on/off instantly
 - **Smooth transitions** — sidebars fade and collapse with CSS animations
-- **Persistent state** — your preference is saved across browser sessions and tabs
-- **Full-width feed** — the primary column expands to fill the available space when sidebars are hidden
+- **Persistent state** — your preferences are saved across browser sessions and tabs via Chrome Sync
+- **Full-width feed** — the primary column expands cleanly to fill available space
 - Works on both `x.com` and `twitter.com`
 
 ## Preview

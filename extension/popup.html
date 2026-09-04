@@ -96,7 +96,10 @@
 
     .status {
       margin-top: 12px;
-      padding: 8px 12px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
       border-radius: 8px;
       font-size: 12px;
       text-align: center;
@@ -111,6 +114,105 @@
     .status.off {
       background: rgba(62, 65, 68, 0.5);
       color: #71767b;
+    }
+
+    /* Sub-options section */
+    .options-section {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #2f3336;
+      transition: all 0.3s ease;
+      max-height: 200px;
+      opacity: 1;
+      overflow: hidden;
+    }
+
+    .options-section.hidden {
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      padding-top: 0;
+      border-top-color: transparent;
+      pointer-events: none;
+    }
+
+    .options-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #71767b;
+      margin-bottom: 8px;
+    }
+
+    .sub-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+
+    .sub-toggle-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sub-toggle-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #e7e9ea;
+    }
+
+    .sub-toggle-desc {
+      font-size: 11px;
+      color: #71767b;
+    }
+
+    /* Small switch for sub-options */
+    .switch-sm {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .switch-sm input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-sm .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #3e4144;
+      transition: 0.25s;
+      border-radius: 20px;
+    }
+
+    .switch-sm .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #e7e9ea;
+      transition: 0.25s;
+      border-radius: 50%;
+    }
+
+    .switch-sm input:checked + .slider {
+      background-color: #1d9bf0;
+    }
+
+    .switch-sm input:checked + .slider:before {
+      transform: translateX(16px);
     }
 
     .shortcut {
@@ -144,6 +246,32 @@
       <input type="checkbox" id="focusToggle">
       <span class="slider"></span>
     </label>
+  </div>
+
+  <div class="options-section hidden" id="optionsSection">
+    <div class="options-title">Sidebars to Hide</div>
+
+    <div class="sub-toggle-row">
+      <div class="sub-toggle-info">
+        <span class="sub-toggle-label">Left Sidebar</span>
+        <span class="sub-toggle-desc">Navigation menu</span>
+      </div>
+      <label class="switch-sm">
+        <input type="checkbox" id="hideLeftToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="sub-toggle-row">
+      <div class="sub-toggle-info">
+        <span class="sub-toggle-label">Right Sidebar</span>
+        <span class="sub-toggle-desc">Trends & recommendations</span>
+      </div>
+      <label class="switch-sm">
+        <input type="checkbox" id="hideRightToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
   </div>
 
   <div class="status off" id="statusText">Focus mode is OFF</div>

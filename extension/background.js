@@ -1,21 +1,35 @@
 // Listen for keyboard shortcut command
 chrome.commands.onCommand.addListener((command) => {
   if (command === 'toggle-focus-mode') {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'toggle' });
-      }
+    chrome.storage.sync.get(['focusEnabled'], (result) => {
+      const newState = !result.focusEnabled;
+      chrome.storage.sync.set({ focusEnabled: newState });
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs[0]) {
+          chrome.tabs.sendMessage(
+            tabs[0].id,
+            { action: 'toggle-from-popup', focusEnabled: newState },
+            () => {
+              if (chrome.runtime.lastError) {
+                // Tab doesn't have content script, ignore
+              }
+            }
+          );
+        }
+      });
     });
   }
 });
 
-// Listen for extension icon click (when popup is not shown)
-// Also handle messages from popup
+// Handle messages from popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'toggle-from-popup') {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'toggle' }, (response) => {
+        chrome.tabs.sendMessage(tabs[0].id, message, (response) => {
+          if (chrome.runtime.lastError) {
+            // Ignore error if tab doesn't have content script
+          }
           sendResponse(response);
         });
       }
@@ -27,6 +41,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'get-state' }, (response) => {
+          if (chrome.runtime.lastError) {
+            // Ignore error
+          }
           sendResponse(response);
         });
       }
